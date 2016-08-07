@@ -1,3 +1,6 @@
+Slightly modified version of Uno Zen for my blog https://wojtek.gustowski.pl
+
+
 # Uno Zen for Ghost
 
 ![Last version](https://img.shields.io/github/tag/Kikobeats/uno-zen.svg?style=flat-square)
