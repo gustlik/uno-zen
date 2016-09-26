@@ -3,25 +3,23 @@
 # -- Dependencies --------------------------------------------------------------
 
 gulp        = require 'gulp'
+gulpif      = require 'gulp-if'
 gutil       = require 'gulp-util'
 sass        = require 'gulp-sass'
 concat      = require 'gulp-concat'
 coffee      = require 'gulp-coffee'
 header      = require 'gulp-header'
 uglify      = require 'gulp-uglify'
-cssmin      = require 'gulp-cssmin'
+cssnano     = require 'gulp-cssnano'
 addsrc      = require 'gulp-add-src'
 changed     = require 'gulp-changed'
-shorthand   = require 'gulp-shorthand'
+browserSync = require 'browser-sync'
 pkg         = require './package.json'
 prefix      = require 'gulp-autoprefixer'
 strip       = require 'gulp-strip-css-comments'
-browserSync = require 'browser-sync'
 reload      = browserSync.reload
 
-PORT =
-  GHOST: 2387
-  BROWSERSYNC: 3000
+isProduction = process.env.NODE_ENV is 'production'
 
 # -- Files ---------------------------------------------------------------------
 
@@ -68,8 +66,8 @@ gulp.task 'js-common', ->
   .pipe coffee().on 'error', gutil.log
   .pipe addsrc src.js.common.vendor
   .pipe concat dist.name + '.common.js'
-  .pipe uglify()
-  .pipe header banner, pkg: pkg
+  .pipe gulpif(isProduction, uglify())
+  .pipe gulpif(isProduction, header banner, pkg: pkg)
   .pipe gulp.dest dist.js
   return
 
@@ -77,8 +75,8 @@ gulp.task 'js-post', ->
   gulp.src src.js.post
   .pipe changed dist.js
   .pipe concat dist.name + '.post.js'
-  .pipe uglify()
-  .pipe header banner, pkg: pkg
+  .pipe gulpif(isProduction, uglify())
+  .pipe gulpif(isProduction, header banner, pkg: pkg)
   .pipe gulp.dest dist.js
   return
 
@@ -86,23 +84,16 @@ gulp.task 'css', ->
   gulp.src src.css.vendor
   .pipe changed dist.css
   .pipe addsrc src.sass.main
-  .pipe sass().on 'error', gutil.log
+  .pipe sass().on('error', sass.logError)
   .pipe concat '' + dist.name + '.css'
-  .pipe prefix()
-  .pipe strip
-    all: true
-  .pipe shorthand()
-  .pipe cssmin()
-  .pipe header banner, pkg: pkg
+  .pipe gulpif(isProduction, prefix())
+  .pipe gulpif(isProduction, strip all: true)
+  .pipe gulpif(isProduction, cssnano())
+  .pipe gulpif(isProduction, header banner, pkg: pkg)
   .pipe gulp.dest dist.css
   return
 
-gulp.task 'server', ->
-  browserSync.init
-    proxy: "http://127.0.0.1:#{PORT.GHOST}"
-    port: PORT.BROWSERSYNC
-    files: ['assets/**/*.*']
-  return
+gulp.task 'server', -> browserSync.init(pkg.browserSync)
 
 gulp.task 'js', ['js-common', 'js-post']
 gulp.task 'build', ['css', 'js']
