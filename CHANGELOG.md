@@ -1,3 +1,39 @@
+<a name="2.9.8"></a>
+## 2.9.8 (2017-08-05)
+
+
+
+
+<a name="2.9.7"></a>
+## 2.9.7 (2017-08-05)
+
+* author email ([3f6624c](https://github.com/kikobeats/uno-zen/commit/3f6624c))
+* Ghost error to replace few key names ([6ba56b1](https://github.com/kikobeats/uno-zen/commit/6ba56b1))
+* removed a non existing url from showcase whihc failed the checks ([e24f512](https://github.com/kikobeats/uno-zen/commit/e24f512))
+* Update README.md ([6751b8f](https://github.com/kikobeats/uno-zen/commit/6751b8f))
+* docs(readme): add Greenkeeper badge ([1db15b1](https://github.com/kikobeats/uno-zen/commit/1db15b1))
+
+
+
+<a name="2.9.6"></a>
+## 2.9.6 (2017-06-25)
+
+* Fix backward compatibilty for cover image ([7f64345](https://github.com/kikobeats/uno-zen/commit/7f64345))
+
+
+
+<a name="2.9.5"></a>
+## 2.9.5 (2017-06-19)
+
+* Create README.md ([91c53b9](https://github.com/kikobeats/uno-zen/commit/91c53b9))
+* Removed the 404 ([0c4c978](https://github.com/kikobeats/uno-zen/commit/0c4c978))
+* Update Ghost badge ([e08e063](https://github.com/kikobeats/uno-zen/commit/e08e063))
+* Update node version ([c2deddc](https://github.com/kikobeats/uno-zen/commit/c2deddc))
+* Updated aside.hbs to 1.0 ([3d75ca9](https://github.com/kikobeats/uno-zen/commit/3d75ca9))
+* Updated error.hbs to 1.0 ([c986f75](https://github.com/kikobeats/uno-zen/commit/c986f75))
+
+
+
 <a name="2.9.4"></a>
 ## 2.9.4 (2016-09-25)
 
